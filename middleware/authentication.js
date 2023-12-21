@@ -24,13 +24,13 @@ exports.authenticatorAdmin = (req, res, next) => {
 
     if (token && process.env.JWT_SECRET) {
         jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
-            roleId = await Role.findByPk(decoded.userId)
+            user = await User.findByPk(decoded.userId)
             if (err) {
                 return res.status(401).json({ error: 'Access denied' });
             }
 
-            if (decoded && roleId) {
-                if (roleId === 1) {
+            if (decoded && user.roleId) {
+                if (user.roleId === 1) {
                     next();
                 } else {
                     res.status(403).json({ error: 'Permission denied' });
@@ -49,13 +49,13 @@ exports.authenticatorAccountant = (req, res, next) => {
 
     if (token && process.env.JWT_SECRET) {
         jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
-            roleId = await Role.findByPk(decoded.userId)
+            user = await User.findByPk(decoded.userId)
             if (err) {
                 return res.status(401).json({ error: 'Access denied' });
             }
 
-            if (decoded && roleId) {
-                if (roleId === 1 || roleId === 2) {
+            if (decoded && user.roleId) {
+                if (user.roleId === 1 || user.roleId === 2) {
                     next();
                 } else {
                     res.status(403).json({ error: 'Permission denied' });
@@ -75,13 +75,13 @@ exports.authenticatorUser = (req, res, next) => {
 
     if (token && process.env.JWT_SECRET) {
         jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
-            roleId = await Role.findByPk(decoded.userId)
+            user = await User.findByPk(decoded.userId)
             if (err) {
                 return res.status(401).json({ error: 'Access denied' });
             }
 
-            if (decoded && roleId) {
-                if (id == decoded.userId || roleId === 1) {
+            if (decoded && user.roleId) {
+                if (id == decoded.userId || user.roleId === 1) {
                     next();
                 } else {
                     res.status(403).json({ error: 'Permission denied' });
