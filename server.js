@@ -11,8 +11,10 @@ const Purchase = require('./models/purchase')
 const Model = require('./models/model')
 
 //Routes
-const Authentication = require('./routes/authentication')
+const Authentication = require('./routes/authenticationRoutes')
 
+const usersRoute = require('./routes/userRoute.js');
+const rolesRoute = require('./routes/roleRoute.js');
 
 app.use(cors())
 app.use(express.json())
@@ -23,12 +25,14 @@ app.use('/option', require('./routes/optionRoute'))
 app.use('/model', require('./routes/modelRoute'))
 app.use("/authentication", Authentication)
 
+app.use('/users', usersRoute);
+app.use('/roles', rolesRoute);
 
-/*let maj = async(req,res)=>{
+/* let maj = async(req,res)=>{
     await sequelize.sync({force: true});
     console.log('maj effectuée');
 }
-maj();*/
+maj();*/ 
 
 app.listen(3000, () => {
     console.log("serverStart")
