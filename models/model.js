@@ -1,6 +1,5 @@
 const sequelize = require('../database/database');
 const { DataTypes } = require('sequelize');
-const User = require('./user');
 const Option = require('./option');
 const Engine = require('./engine')
 
@@ -39,7 +38,7 @@ Option.belongsToMany(Model, { through: 'ModelOption' })
 
 
 
-Model.belongsToMany(Engine, { through: 'ModelEngine' })
-Engine.belongsToMany(Model, { through: 'ModelEngine' })
+Model.belongsTo(Engine, { foreignKey: 'engineId' })
+Engine.hasMany(Model, { foreignKey: 'engineId' })
 
 module.exports = Model;

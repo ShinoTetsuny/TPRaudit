@@ -1,7 +1,6 @@
 const express = require("express")
 const app = express()
 let cors = require("cors")
-
 //Models
 const sequelize = require('./database/database');
 const Option = require('./models/option')
@@ -20,6 +19,10 @@ const rolesRoute = require('./routes/roleRoute.js');
 app.use(cors())
 app.use(express.json())
 
+
+app.use('/engine', require('./routes/engineRoute'))
+app.use('/option', require('./routes/optionRoute'))
+app.use('/model', require('./routes/modelRoute'))
 app.use("/authentication", Authentication)
 
 app.use('/users', usersRoute);
@@ -29,7 +32,7 @@ app.use('/roles', rolesRoute);
     await sequelize.sync({force: true});
     console.log('maj effectuée');
 }
-maj();*/   
+maj();*/ 
 
 app.listen(3000, () => {
     console.log("serverStart")
