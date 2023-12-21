@@ -1,6 +1,7 @@
 const user = require('../models/user');
 const Role = require('../models/role');
 
+
 exports.getAllUsers = (req, res) => {
     user.findAll()
         .then(users => {
