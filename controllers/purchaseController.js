@@ -49,6 +49,19 @@ exports.purchase = async (req, res) => {
     }
 }
 
+exports.get = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const purchases = await Purchase.findAll({
+            where: {userId: id}
+        });
+        res.status(200).json(purchases);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json("Internal Server Error");
+    }  
+}
+
 exports.create = async (req, res) => {
     try{
         const { modelId, userId, optionTaken, price } = req.body
