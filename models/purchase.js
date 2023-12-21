@@ -9,6 +9,10 @@ const Purchase = sequelize.define('purchase', {
         type: DataTypes.FLOAT,
         allowNull: false
     },
+    optionTaken: {
+        type:DataTypes.JSON,
+        allowNull: true
+    }
 }, {
   sequelize,
   freezeTableName: true,
