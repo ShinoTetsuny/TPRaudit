@@ -12,7 +12,7 @@ const Model = require('./models/model')
 
 //Routes
 const Authentication = require('./routes/authenticationRoutes')
-
+const PurchaseRoute = require('./routes/purchaseRoutes')
 const usersRoute = require('./routes/userRoute.js');
 const rolesRoute = require('./routes/roleRoute.js');
 
@@ -24,6 +24,7 @@ app.use('/engine', require('./routes/engineRoute'))
 app.use('/option', require('./routes/optionRoute'))
 app.use('/model', require('./routes/modelRoute'))
 app.use("/authentication", Authentication)
+app.use("/purchase", PurchaseRoute)
 
 app.use('/users', usersRoute);
 app.use('/roles', rolesRoute);
