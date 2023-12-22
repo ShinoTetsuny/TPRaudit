@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { Link } from 'react-bootstrap/lib/Navbar';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const [showLoginModal, setShowLoginModal] = useState(false);
@@ -91,41 +91,41 @@ const Navbar = () => {
         <nav>
         <div className="navbar-container">
             <div className="navbar-left">
-            <button>Accueil</button>
+            <button><Link to="/">Accueil</Link></button>
             </div>
             <div className="navbar-right">
-            {/* {role === 1 ? <button>Administration</button> : ''}
-            {role === 1 || role === 2 ? <button>Comptabilité</button> : ''} */}
-            <Link to="/admin">Administration</Link>
-            <Link to="/accounting">Comptabilité</Link>
-            {Cookies.get('token') ? <button>Mon Compte</button> : ''}
-            {Cookies.get('token') ? <button onClick={handleLogOut}>Déconnexion</button> : ''}
-            {Cookies.get('token') == null ? <button onClick={handleShowLoginModal}>Se connecter</button> : ''}
-            {Cookies.get('token') == null ? <button onClick={handleShowSignupModal}>S'inscrire</button> : ''}
+                {/* {role === 1 ? <button>Administration</button> : ''}
+                {role === 1 || role === 2 ? <button>Comptabilité</button> : ''} */}
+                {Cookies.get('token') ? <button><Link to="/admin">Administration</Link></button> : ''}
+                {Cookies.get('token') ? <button><Link to="/accounting">Comptabilité</Link></button> : ''}
+                {Cookies.get('token') ? <button>Mon Compte</button> : ''}
+                {Cookies.get('token') ? <button class="btn btn-danger" onClick={handleLogOut}>Déconnexion</button> : ''}
+                {Cookies.get('token') == null ? <button class="btn btn-primary" onClick={handleShowLoginModal}>Se connecter</button> : ''}
+                {Cookies.get('token') == null ? <button class="btn btn-primary" onClick={handleShowSignupModal}>S'inscrire</button> : ''}
             </div>
         </div>
 
         {/* Modal de Connexion */}
         <Modal show={showLoginModal} onHide={handleCloseLoginModal}>
             <Modal.Header closeButton>
-            <Modal.Title>Se connecter</Modal.Title>
+                <Modal.Title>Se connecter</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-            <Form onSubmit={handleLoginSubmit}>
-                <Form.Group controlId="formBasicEmail">
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="email" placeholder="Entrer votre email" id="email"/>
-                </Form.Group>
+                <Form onSubmit={handleLoginSubmit}>
+                    <Form.Group controlId="formBasicEmail">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control type="email" placeholder="Entrer votre email" id="email"/>
+                    </Form.Group>
 
-                <Form.Group controlId="formBasicPassword">
-                <Form.Label>Mot de passe</Form.Label>
-                <Form.Control type="password" placeholder="Mot de passe" id="password"/>
-                </Form.Group>
+                    <Form.Group controlId="formBasicPassword">
+                    <Form.Label>Mot de passe</Form.Label>
+                    <Form.Control type="password" placeholder="Mot de passe" id="password"/>
+                    </Form.Group>
 
-                <Button variant="primary" type="submit">
-                Se connecter
-                </Button>
-            </Form>
+                    <Button variant="primary" type="submit">
+                    Se connecter
+                    </Button>
+                </Form>
             </Modal.Body>
         </Modal>
 

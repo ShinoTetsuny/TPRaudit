@@ -15,8 +15,9 @@ const Model = require('./models/model')
 //     allowedHeaders: [ 'Authorization'],
 //     optionsSuccessStatus: 200 // For legacy browser support
 //    }
+// app.use(cors(corsOptions))
   
-app.use(cors(corsOptions))
+app.use(cors())
 app.use(express.json())
 
 //Routes
