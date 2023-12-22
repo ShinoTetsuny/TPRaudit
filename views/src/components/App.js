@@ -1,5 +1,9 @@
-import logo from './logo.svg';
-import '..style/App.css';
+// import logo from './logo.svg';
+import '../style/App.css';
+import Homepage from './homepage';
+import Modeldetails from './modeldetails';
+import Navbar from './navbar';
+
 
 import {
   Routes,
@@ -8,9 +12,14 @@ import {
 
 function App() {
   return (
+    <>
+    <Navbar/>
     <Routes>
-        //ROUTE A FAIRE
+      <Route path="/" element={< Homepage />} />
+      <Route path="/model/:id" element={< Modeldetails />} />
     </Routes>
+    </>
+
   );
 }
 

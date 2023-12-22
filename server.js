@@ -33,7 +33,7 @@ app.use('/roles', rolesRoute);
     await sequelize.sync({force: true});
     console.log('maj effectuée');
 }
-maj();*/ 
+maj();  */
 
 app.listen(3000, () => {
     console.log("serverStart")
