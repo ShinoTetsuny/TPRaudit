@@ -34,8 +34,8 @@ exports.getOneRole = (req, res) => {
     }
 
 exports.verifyRole = (req, res) => {
-    const token = req.query.token ? req.query.token : req.headers.authorization
-
+    const token = req.body.token ? req.body.token : req.headers.authorization
+    console.log(token);
     if(token && process.env.JWT_SECRET){
         jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
             if(err){
@@ -44,10 +44,15 @@ exports.verifyRole = (req, res) => {
                 User.findOne({
                     where: {
                         id: decoded.id
-                    },
-                    include: [Role]
+                    }
                 }).then(user => {
-                    res.status(200).json({role: user.role.name})
+                    Role.findOne({
+                        where: {
+                            id: user.roleId
+                        }
+                    }).then(role => {
+                        res.status(200).json({role: role.id})
+                    })
                 })
             }
         })

@@ -10,14 +10,21 @@ const User = require('./models/user')
 const Purchase = require('./models/purchase')
 const Model = require('./models/model')
 
+// var corsOptions = {
+//     origin: 'http://localhost:3001',
+//     allowedHeaders: [ 'Authorization'],
+//     optionsSuccessStatus: 200 // For legacy browser support
+//    }
+  
+app.use(cors(corsOptions))
+app.use(express.json())
+
 //Routes
 const Authentication = require('./routes/authenticationRoutes')
 const PurchaseRoute = require('./routes/purchaseRoutes')
 const usersRoute = require('./routes/userRoute.js');
 const rolesRoute = require('./routes/roleRoute.js');
 
-app.use(cors())
-app.use(express.json())
 
 
 app.use('/engine', require('./routes/engineRoute'))

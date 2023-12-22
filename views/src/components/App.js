@@ -1,12 +1,16 @@
 import '../style/App.css';
+import '../style/accounting.css';
+import '../style/navbar.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Navbar from './navbar';
 import EngineDetails from './admin/[id]/engine';
 import ModelDetails from './admin/[id]/model';
 import OptionDetails from './admin/[id]/option';
 import DashBoard from './admin/dashboard';
-import Navbar from './navbar';
-import '../style/App.css';
 import Homepage from './homepage';
 import Modeldetails from './modeldetails';
+import Accounting from './accouting';
+import { Button, Modal, Form } from 'react-bootstrap';
 
 import {
   Routes,
@@ -24,6 +28,7 @@ function App() {
       <Route path="/admin/:id/option" element={<OptionDetails/>} />
       <Route path="/" element={< Homepage />} />
       <Route path="/model/:id" element={< Modeldetails />} />
+      <Route path="/accounting" element={< Accounting />} />
     </Routes>
     </>
   );

@@ -2,23 +2,31 @@ import React, { useState, useEffect } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { Link } from 'react-bootstrap/lib/Navbar';
 
 const Navbar = () => {
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [showSignupModal, setShowSignupModal] = useState(false);
     const [role, setRole] = useState('');
 
-    useEffect(() => {
-        const fetchData = async () => {
-        try {
-            setRole(await axios.get(`http://localhost:3000/roles/verify${Cookies.get('token')}`));
-        } catch (error) {
-            console.error(error);
-        }
-        };
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         let test = Cookies.get('token')
+    //     try {
+    //         const response = await axios.get(`http://localhost:3000/roles/verify`,{
+    //             Body: {
+    //                 token: test
+    //             }
+    //     })
+    //         setRole(response.data.role);
+    //         console.log(role);
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    //     };
 
-        fetchData();
-    }, []);
+    //     fetchData();
+    // }, []);
 
 
     const handleCloseLoginModal = () => setShowLoginModal(false);
@@ -86,8 +94,10 @@ const Navbar = () => {
             <button>Accueil</button>
             </div>
             <div className="navbar-right">
-            {role === 1 ? <button>Administration</button> : ''}
-            {role === 1 || role === 2 ? <button>Comptabilité</button> : ''}
+            {/* {role === 1 ? <button>Administration</button> : ''}
+            {role === 1 || role === 2 ? <button>Comptabilité</button> : ''} */}
+            <Link to="/admin">Administration</Link>
+            <Link to="/accounting">Comptabilité</Link>
             {Cookies.get('token') ? <button>Mon Compte</button> : ''}
             {Cookies.get('token') ? <button onClick={handleLogOut}>Déconnexion</button> : ''}
             {Cookies.get('token') == null ? <button onClick={handleShowLoginModal}>Se connecter</button> : ''}

@@ -4,9 +4,9 @@ const rolesRoute = require('../controllers/roleController');
 
 router.get('/', rolesRoute.getAllRoles);
 
-router.get('/:id', rolesRoute.getOneRole);
-
 router.get('/verify', rolesRoute.verifyRole);
+
+router.get('/:id', rolesRoute.getOneRole);
 
 router.post('/', rolesRoute.addRole);
 
