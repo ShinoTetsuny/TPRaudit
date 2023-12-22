@@ -1,5 +1,7 @@
-import logo from './logo.svg';
-import '..style/App.css';
+// import logo from './logo.svg';
+import '../style/App.css';
+import Homepage from './homepage';
+
 
 import {
   Routes,
@@ -9,7 +11,8 @@ import {
 function App() {
   return (
     <Routes>
-        //ROUTE A FAIRE
+      <Route path="/" element={< Homepage />} >
+      </Route>
     </Routes>
   );
 }
