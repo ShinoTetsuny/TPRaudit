@@ -18,10 +18,20 @@ exports.getOneRole = (req, res) => {
             }
         })
         .then(role => {
-            res.json(role).json({ message: 'Role trouvé' });
+            if (role) {
+                // Si le rôle est trouvé, renvoyer la réponse JSON avec le rôle et le message
+                res.json({ role: role });
+            } else {
+                // Si le rôle n'est pas trouvé, renvoyer un message d'erreur avec le code d'état 404 (Not Found)
+                res.status(404).json({ message: 'Role non trouvé' });
+            }
         })
-        .catch(err => console.log(err))
-}
+        .catch(err => {
+            // En cas d'erreur, envoyer un message d'erreur avec le code d'état 500 (Erreur interne du serveur)
+            console.error(err);
+            res.status(500).json({ message: 'Erreur interne du serveur' });
+        });
+    }
 
 exports.verifyRole = (req, res) => {
     const token = req.query.token ? req.query.token : req.headers.authorization
@@ -52,7 +62,12 @@ exports.addRole = (req, res) => {
             name: name
         })
         .then(role => {
-            res.json(role);
+            if (role) {
+                res.json({ message: "Role ajouté avec succès" });
+            } else {
+                res.status(404).json({ message: "Erreur lors de l'ajout du role" });
+            }
+            
         })
         .catch(err => console.log(err))
 }
