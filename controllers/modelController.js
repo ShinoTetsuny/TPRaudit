@@ -13,12 +13,17 @@ exports.getOneModel = async (req, res, next) => {
     let object = {}
 
     let aModel = await model.findOne({ where: { id: req.params.id } })
-        .catch((error) => res.status(400).json({ error }))
+        .catch((error) => res.status(400).json("model"))
+    
+    if (!aModel) {
+        return res.status(404).json({ error: 'Model not found' });
+    }
+    
     object.model = aModel
 
     let options = await model.findOne({ where: { id: req.params.id } })
         .then((model) => model.getOptions())
-        .catch((error) => res.status(400).json({ error }))
+        .catch((error) => res.status(400).json("options"))
     object.options = options
 
     res.status(200).json(object)
@@ -34,9 +39,11 @@ exports.createModel = async (req, res, next) => {
         engineId: req.body.engineId,
     })
     .catch((error) => res.status(400).json({ error }))
-    req.body.options.forEach(option => {
-        newModel.addOption(option)
-    });
+    if (req.body.options.length != 0) {
+        req.body.options.forEach(option => {
+            newModel.addOption(option)
+        })
+    };
 
     res.status(201).json(newModel)
 };

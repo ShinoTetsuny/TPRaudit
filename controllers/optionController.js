@@ -2,18 +2,21 @@ const option = require('../models/option');
 
 exports.getAllOptions = (req, res, next) => {
     option.findAll()
-        .then((option) => res.status(200).json(option, models))
+        .then((option) => res.status(200).json(option))
         .catch((error) => res.status(400).json({ error }))
 };
 
 exports.getOneOption = async (req, res, next) => {
     let object = {}
-    let anOption = await option.findPk( req.params.id )
+    let anOption = await option.findByPk( req.params.id )
         .catch((error) => res.status(400).json({ error }))
-        
+    
+    if (!anOption) {
+        return res.status(404).json({ error: 'Option not found' });
+    }
     object.option = anOption
 
-    let models = await option.findPk( req.params.id )
+    let models = await option.findByPk( req.params.id )
         .then((option) => option.getModels())
         .catch((error) => res.status(400).json({ error }))
 
@@ -36,7 +39,7 @@ exports.createOption = async (req, res, next) => {
 };
 
 exports.editOption = async (req, res, next) => {
-    let oldOption = await option.findPk( req.params.id )
+    let oldOption = await option.findByPk( req.params.id )
         .catch((error) => res.status(400).json({ error }))
     
     await option.update({
