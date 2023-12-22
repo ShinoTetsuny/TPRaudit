@@ -1,6 +1,7 @@
 // import logo from './logo.svg';
 import '../style/App.css';
 import Homepage from './homepage';
+import Modeldetails from './modeldetails';
 
 
 import {
@@ -11,8 +12,9 @@ import {
 function App() {
   return (
     <Routes>
-      <Route path="/" element={< Homepage />} >
-      </Route>
+      <Route path="/" element={< Homepage />} />
+      <Route path="/model/:id" element={< Modeldetails />} />
+      
     </Routes>
   );
 }

@@ -1,6 +1,3 @@
-// src/pages/HomePage.js
-// import React from 'react';
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -22,17 +19,14 @@ const Homepage = () => {
     }, []);
 
     return (
-        <div className="Body">
-            <header className="Body-header">
+        <div className="homepage-container">
+            <header className="homepage-header">
                 <h1>Models</h1>
             </header>
             <div className="card-container">
                 {models.map((model) => (
-                    <Link to={`/model/${model.id}`} key={model.id} className="card"> {/* Utilisez Link au lieu de div */}
-                    <div key={model.id} className="card">
-                        <h2>{model.name}</h2>
-                        {/* <img src={model.imageUrl} alt={model.modelName} /> */}
-                    </div>
+                    <Link to={`/model/${model.id}`} key={model.id} className="card">
+                        <h2 className="model-name">{model.name}</h2>
                     </Link>
                 ))}
             </div>
