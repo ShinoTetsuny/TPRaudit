@@ -10,7 +10,8 @@ import DashBoard from './admin/dashboard';
 import Homepage from './homepage';
 import Modeldetails from './modeldetails';
 import Accounting from './accouting';
-import { Button, Modal, Form } from 'react-bootstrap';
+import Purchases from './purchases';
+// import { Button, Modal, Form } from 'react-bootstrap';
 
 import {
   Routes,
@@ -28,6 +29,7 @@ function App() {
       <Route path="/admin/:id/option" element={<OptionDetails/>} />
       <Route path="/" element={< Homepage />} />
       <Route path="/model/:id" element={< Modeldetails />} />
+      <Route path="/purchase/:id" element={< Purchases />} />
       <Route path="/accounting" element={< Accounting />} />
     </Routes>
     </>

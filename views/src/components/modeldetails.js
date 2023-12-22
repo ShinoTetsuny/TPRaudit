@@ -28,21 +28,16 @@ const ModelDetails = () => {
         fetchModelDetails();
     }, [id]);
 
-    // console.log(modelData);
 
     if (!modelData || !engineData) {
         return <p>Chargement...</p>;
     }
 
     const { model } = modelData;
-    // const { engine } = engineData;
     let lesOptions = modelData.options;
-    console.log(engineData.name)
-    // console.log(modelData.options);
     return (
         <div className="model-details-container">
-            <h1 className="model-details-title">Model Details</h1>
-            {/* <p className="model-details-item">ID: {model.id}</p> */}
+            <h1 className="model-details-title">Détails du modèle</h1>
             <p className="model-details-item">Nom: {model.name}</p>
             <p className="model-details-item">Places: {model.seat}</p>
             <p className="model-details-item">Portes: {model.door}</p>
@@ -56,12 +51,21 @@ const ModelDetails = () => {
                         <div key={option.name} className="model-details-option">
                             <p className="model-details-item">Nom: {option.name}</p>
                             <p className="model-details-item">Prix: {option.price}</p>
-                        </div>
-                    ))}
                 </div>
+                    ))}
+            </div>
             )}
+        <div className="model-details-container">
+                    
+                    
+        <Link to={`/purchase/${model.id}`} key={model.id} className="buy-button go-back-link">
+            Acheter
+        </Link>
 
-        <Link to="/" className="go-back-link">Retour à la page d'accueil</Link>
+        <Link to="/" className="go-back-link">
+            Retour à la page d'accueil
+        </Link>
+        </div>
     </div>
     );
 };
