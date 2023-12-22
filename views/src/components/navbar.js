@@ -96,8 +96,8 @@ const Navbar = () => {
             <div className="navbar-right">
                 {/* {role === 1 ? <button>Administration</button> : ''}
                 {role === 1 || role === 2 ? <button>Comptabilité</button> : ''} */}
-                <button><Link to="/admin">Administration</Link></button>
-                <button><Link to="/accounting">Comptabilité</Link></button>
+                {Cookies.get('token') ? <button><Link to="/admin">Administration</Link></button> : ''}
+                {Cookies.get('token') ? <button><Link to="/accounting">Comptabilité</Link></button> : ''}
                 {Cookies.get('token') ? <button>Mon Compte</button> : ''}
                 {Cookies.get('token') ? <button class="btn btn-danger" onClick={handleLogOut}>Déconnexion</button> : ''}
                 {Cookies.get('token') == null ? <button class="btn btn-primary" onClick={handleShowLoginModal}>Se connecter</button> : ''}
