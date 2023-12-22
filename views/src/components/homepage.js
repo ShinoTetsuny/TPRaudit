@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-
 const apiUrl = 'http://localhost:3000/model/';
 
 const Homepage = () => {
@@ -14,14 +13,14 @@ const Homepage = () => {
                 setModels(response.data);
             })
             .catch(error => {
-                console.error('Error retrieving models:', error);
+                console.error('Erreur de récupération du modèle:', error);
             });
     }, []);
 
     return (
         <div className="homepage-container">
             <header className="homepage-header">
-                <h1>Models</h1>
+                <h1>Modèles</h1>
             </header>
             <div className="card-container">
                 {models.map((model) => (
