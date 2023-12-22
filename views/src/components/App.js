@@ -2,6 +2,7 @@
 import '../style/App.css';
 import Homepage from './homepage';
 import Modeldetails from './modeldetails';
+import Navbar from './navbar';
 
 
 import {
@@ -11,11 +12,14 @@ import {
 
 function App() {
   return (
+    <>
+    <Navbar/>
     <Routes>
       <Route path="/" element={< Homepage />} />
       <Route path="/model/:id" element={< Modeldetails />} />
-      
     </Routes>
+    </>
+
   );
 }
 

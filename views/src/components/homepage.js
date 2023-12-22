@@ -5,11 +5,6 @@ import { Link } from 'react-router-dom';
 
 const apiUrl = 'http://localhost:3000/model/';
 
-/* const generateCarImage = () => {
-    // Remplacez cette URL par celle de votre image de voiture ou utilisez une API appropriée
-    return 'https://example.com/car-image.jpg';
-}; */
-
 const Homepage = () => {
     const [models, setModels] = useState([]);
 

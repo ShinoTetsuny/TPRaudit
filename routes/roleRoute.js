@@ -6,6 +6,8 @@ router.get('/', rolesRoute.getAllRoles);
 
 router.get('/:id', rolesRoute.getOneRole);
 
+router.get('/verify', rolesRoute.verifyRole);
+
 router.post('/', rolesRoute.addRole);
 
 router.put('/:id', rolesRoute.updateRole);
