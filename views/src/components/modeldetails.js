@@ -28,40 +28,44 @@ const ModelDetails = () => {
         fetchModelDetails();
     }, [id]);
 
-    // console.log(modelData);
 
     if (!modelData || !engineData) {
-        return <p>Loading...</p>;
+        return <p>Chargement...</p>;
     }
 
     const { model } = modelData;
-    // const { engine } = engineData;
     let lesOptions = modelData.options;
-    console.log(engineData.name)
-    // console.log(modelData.options);
     return (
         <div className="model-details-container">
-            <h1 className="model-details-title">Model Details</h1>
-            <p className="model-details-item">ID: {model.id}</p>
-            <p className="model-details-item">Name: {model.name}</p>
-            <p className="model-details-item">Seat: {model.seat}</p>
-            <p className="model-details-item">Door: {model.door}</p>
-            <p className="model-details-item">Price: {model.price}</p>
-            <p className="model-details-item">Engine Name: {engineData.name}</p>
+            <h1 className="model-details-title">Détails du modèle</h1>
+            <p className="model-details-item">Nom: {model.name}</p>
+            <p className="model-details-item">Places: {model.seat}</p>
+            <p className="model-details-item">Portes: {model.door}</p>
+            <p className="model-details-item">Prix: {model.price}</p>
+            <p className="model-details-item">Moteur: {engineData.name}</p>
 
             {lesOptions && lesOptions.length > 0 && (
                 <div>
                     <h2 className="model-details-option"> Options </h2>
                     {lesOptions.map((option) => (
                         <div key={option.name} className="model-details-option">
-                            <p className="model-details-item">Name: {option.name}</p>
-                            <p className="model-details-item">Price: {option.price}</p>
-                        </div>
-                    ))}
+                            <p className="model-details-item">Nom: {option.name}</p>
+                            <p className="model-details-item">Prix: {option.price}</p>
                 </div>
+                    ))}
+            </div>
             )}
+        <div className="model-details-container">
+                    
+                    
+        <Link to={`/purchase/${model.id}`} key={model.id} className="buy-button go-back-link">
+            Acheter
+        </Link>
 
-        <Link to="/" className="go-back-link">Go back to homepage</Link>
+        <Link to="/" className="go-back-link">
+            Retour à la page d'accueil
+        </Link>
+        </div>
     </div>
     );
 };
