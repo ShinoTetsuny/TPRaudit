@@ -48,24 +48,21 @@ exports.createModel = async (req, res, next) => {
     res.status(201).json(newModel)
 };
 
-exports.editModel = (req, res, next) => {
-    let aModel = model.findOne({ where: { id: req.params.id } })
+exports.editModel = async (req, res, next) => {
+    let aModel = await model.findOne({ where: { id: req.params.id } })
         .catch((error) => res.status(400).json({ error }))
-    model.update({
+    await model.update({
         name: req.body.name,
         seat: req.body.seat,
         door: req.body.door,
         price: req.body.price,
         engineId: req.body.engineId,
     }, { where: { id: req.params.id } })
-        .then(() => {
-            aModel.removeOptions()
-            req.body.options.forEach(option => {
-                aModel.addOption(option)
-            });
-        })
-        .then((model) => res.status(200).json(model))
-        .catch((error) => res.status(400).json({ error }))
+    .catch((error) => res.status(400).json({ error , message: "error"}))
+
+    await aModel.setOptions(req.body.options)
+    console.log(aModel);
+    res.status(200).json(aModel)
 };
 
 exports.deleteModel = (req, res, next) => {

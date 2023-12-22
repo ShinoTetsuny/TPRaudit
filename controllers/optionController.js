@@ -39,27 +39,25 @@ exports.createOption = async (req, res, next) => {
 };
 
 exports.editOption = async (req, res, next) => {
-    let oldOption = await option.findByPk( req.params.id )
+    let anOption = await option.findByPk( req.params.id )
         .catch((error) => res.status(400).json({ error }))
     
     await option.update({
         name: req.body.name,
         price: req.body.price,
     }, { where: { id: req.params.id } })
-        .then(() => {
-            oldOption.removeModels()
-            req.body.models.forEach(model => {
-                oldOption.addModel(model)
-            });
-        })
-        .then((option) => res.status(200).json(option))
         .catch((error) => res.status(400).json({ error }))
+
+    await anOption.setOptions(req.body.models)
+    console.log(anOption);
+    res.status(200).json(anOption)
+
 };
 
 exports.deleteOption = async (req, res, next) => {
-    let oldOption = await option.findOne({ where: { id: req.params.id } })
+    let anOption = await option.findOne({ where: { id: req.params.id } })
         .catch((error) => res.status(400).json({ error }))
-    oldOption.removeModels()
+    anOption.removeModels()
     option.destroy({ where: { id: req.params.id } })
         .then((option) => res.status(200).json(option))
         .catch((error) => res.status(400).json({ error }))
